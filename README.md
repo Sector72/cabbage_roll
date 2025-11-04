@@ -99,7 +99,7 @@ _start:                                            ; Here starts the entry
     accept_loop r12, handle_client                 ; handle_client for send/recv routine
     
     handle_client:                                 ; Send/Recv Routine
-        send rbx, response, [bytes_read], 0        ; Send response, 2048 Bytes of length. rbx = Client-FD
+        send rbx, response, [bytes_read], 0        ; Send response [bytes_read] Bytes of length. rbx = Client-FD
         ret                                        ; Return
 ```
 
