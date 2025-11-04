@@ -7,8 +7,8 @@
 ; Updates/Patches coming soon ...
 ; =================================================
 
-%include "net.inc"                                 ; enthält server, accept_loop, prints, etc.
-%include "filesys.inc"                             ; enthält readfile, writed2file, writes2file etc.
+%include "net.inc"                                 ; contains server, accept_loop, prints, etc.
+%include "filesys.inc"                             ; contains readfile, writed2file, writes2file etc.
 
 section .data                                      ; Section .data, for initialized data
     filename db "site.dat",0                       ; Filename of the HTTP/HTML file
@@ -35,6 +35,7 @@ _start:                                            ; Here starts the entry
         send rbx, response, 512, 0                 ; Send response, 512 Bytes of length. rbx = Client-FD
 
         ret                                        ; Return
+
 
 
 
