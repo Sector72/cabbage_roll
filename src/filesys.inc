@@ -193,5 +193,23 @@
     fclose r12
 %endmacro
 
+; ------------------------------------------------------------------------
+; filesize <filename>, <reg>
+; Example: filesize logfile, r13
+; Amount of bytes read ---> r13
+; ------------------------------------------------------------------------
+%macro filesize 2
+    ; %1 = filename (address)
+    ; %2 = Register for filesize (rax, rbx, etc.)
 
+    ; Reserve structure for stat on the stack
+    sub rsp, 144              ; stat struct for x86-64 Linux
+    mov rdi, %1               ; filename
+    lea rsi, [rsp]            ; pointer on stat struct
+    mov eax, 4                ; sys_stat (Linux x86-64)
+    syscall
 
+    ; Return size
+    mov %2, qword [rsp + 48] ; Offset st_size in struct stat = 48 Bytes
+    add rsp, 144
+%endmacro
