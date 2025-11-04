@@ -1,5 +1,119 @@
 HTTP/1.1 200 OK
 Connection: close
-Connection-Type: text/html; charset=UTF-8 
+Connection-Type: text/html; charset=UTF-8
 
-<!DOCTYPE html><html><body><center><h1>Hello HTTP!</h1></center></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample Site</title>
+    <style>
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to right, #f0f4f8, #d9e2ec);
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #4a90e2;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+
+        .card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 400px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2rem;
+            color: #4a90e2;
+        }
+
+        p {
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        button {
+            padding: 10px 25px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 8px;
+            background-color: #4a90e2;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #357ABD;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px 0;
+            background-color: #f0f4f8;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Welcome to the site!</h1>
+</header>
+
+<main>
+    <div class="card">
+        <h1>HTTP-SERVER-WORKS!</h1>
+        <p>If you see this - the http server worked! Congratulations, now please make it ten times better ;)</p>
+        <button id="clickMeBtn">Javascript-Test</button>
+    </div>
+</main>
+
+<footer>
+    &copy; 2025 My beautiful site
+</footer>
+
+<script>
+    const button = document.getElementById('clickMeBtn');
+    button.addEventListener('click', () => {
+        alert('You should not click on buttons like these ...');
+    });
+</script>
+
+</body>
+</html>
+
