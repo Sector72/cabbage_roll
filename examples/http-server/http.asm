@@ -21,21 +21,19 @@ section .data                                      ; Section .data, for initiali
 section .bss                                       ; Section .bss, for uninitialized data
     client_addr: resb 16                           ; Client_Address_Structure
     client_len:  resq 1                            ; Client_Length
-    response: resb 512                             ; Response buffer (for bytes read from file)
+    response: resb 65536                           ; Response buffer (for bytes read from file) = 64KB
+    bytes_read: resq 1                             ; buffer for amount of bytes read from site.dat
 
 section .text                                      ; Section .text, here begins the code
 global _start                                      ; for the linker, entry is at _start
 
 _start:                                            ; Here starts the entry
-    readfile filename, response, 512               ; Read 512 Bytes from"site.dat"
+	filesize filename, r13                         ; Get filesize of site.dat
+	mov [bytes_read], r13                          ; Secure the filesize (in bytes) in bytes_read
+    readfile filename, response, bytes_read        ; Read [bytes_read] Bytes from "site.dat"
     server AF_INET, SOCK_STREAM, server_addr, 5    ; Create Socket und Bind. 5 for Backlog
-    accept_loop r12, handle_client                 ; r12 = Socket-FD and handle_client for send/recv routine
-
+    accept_loop r12, handle_client                 ; handle_client for send/recv routine
+    
     handle_client:                                 ; Send/Recv Routine
-        send rbx, response, 512, 0                 ; Send response, 512 Bytes of length. rbx = Client-FD
-
+        send rbx, response, [bytes_read], 0        ; Send response [bytes_read] Bytes of length. rbx = Client-FD
         ret                                        ; Return
-
-
-
-
